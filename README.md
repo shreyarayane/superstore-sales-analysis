@@ -43,9 +43,21 @@ The project uses the Sample Superstore dataset, which contains 9,994 records and
 ![Profit by Product Category](category_profit.png)
 
 ## Key Findings
-The analysis explores differences in sales and profit across product categories and regions. The regional analysis identified the West region as having the highest sales and profit in the dataset.
+The analysis of 9,994 Superstore records revealed the following business insights:
 
-Additional insights can be developed by examining the category-wise results, top-selling products, and monthly sales trends.
+1. **Overall Performance:** Total sales were $2,297,200.86, with a total profit of $286,397.02.
+
+2. **Regional Performance:** The West region recorded the highest sales ($725,457.82) and profit ($108,418.45).
+
+3. **Category Performance:** Technology was the top-performing category, generating $836,154.03 in sales and $145,454.95 in profit.
+
+4. **Data Quality:** No missing values or duplicate records were found.
+
+5. **Discount Analysis:** Average profit was negative at several discount levels. At a 50% discount, average profit was -$310.70.
+
+6. **Yearly Sales Trend:** 2017 recorded the highest annual sales, totaling $733,215.26.
+
+**Business Recommendation:** Focus on high-performing regions and categories while reviewing discount policies to improve profitability.
 
 ## Project Files
 - `analysis.py` — Python code for data analysis and visualizations.
