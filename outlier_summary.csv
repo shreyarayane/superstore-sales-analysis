@@ -1,0 +1,5 @@
+Column,Lower Bound,Upper Bound,Outlier Count
+Sales,-271.71000000000004,498.93,1167
+Profit,-39.724125,70.816875,1881
+Quantity,-2.5,9.5,170
+Discount,-0.30000000000000004,0.5,856
