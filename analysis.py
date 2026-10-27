@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load the Superstore dataset
 df = pd.read_csv("Sample - Superstore.csv")
@@ -143,3 +145,108 @@ plt.xticks(rotation=45, ha="right")
 plt.tight_layout()
 plt.savefig("subcategory_sales.png")
 plt.show()
+# Correlation Analysis
+
+print("\n--- Correlation Analysis ---")
+
+numerical_data = df[
+    ["Sales", "Quantity", "Discount", "Profit"]
+]
+
+correlation_matrix = numerical_data.corr()
+
+print(correlation_matrix)
+
+# Correlation Heatmap
+
+plt.figure(figsize=(8, 6))
+
+sns.heatmap(
+    correlation_matrix,
+    annot=True,
+    cmap="coolwarm",
+    fmt=".2f"
+)
+
+plt.title("Correlation Heatmap of Superstore Dataset")
+plt.tight_layout()
+plt.savefig("correlation_heatmap.png")
+plt.show()
+# Outlier Detection using IQR Method
+
+print("\n--- Outlier Detection ---")
+
+columns_to_check = ["Sales", "Profit", "Quantity", "Discount"]
+
+for column in columns_to_check:
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
+
+    IQR = Q3 - Q1
+
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+
+    outliers = df[
+        (df[column] < lower_bound) |
+        (df[column] > upper_bound)
+    ]
+
+    print(f"\nColumn: {column}")
+    print(f"Lower Bound: {lower_bound:.2f}")
+    print(f"Upper Bound: {upper_bound:.2f}")
+    print(f"Number of Outliers: {len(outliers)}")
+
+# Save Outlier Analysis Results
+
+outlier_summary = []
+
+for column in columns_to_check:
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
+    IQR = Q3 - Q1
+
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+
+    count = (
+        (df[column] < lower_bound) |
+        (df[column] > upper_bound)
+    ).sum()
+
+    outlier_summary.append({
+        "Column": column,
+        "Lower Bound": lower_bound,
+        "Upper Bound": upper_bound,
+        "Outlier Count": count
+    })
+
+outlier_summary_df = pd.DataFrame(outlier_summary)
+outlier_summary_df.to_csv("outlier_summary.csv", index=False)
+
+print("\nOutlier summary saved to outlier_summary.csv")
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the Superstore dataset
+df = pd.read_csv("Sample - Superstore.csv", encoding="latin1")
+
+# Calculate sales by customer segment
+segment_sales = df.groupby("Segment")["Sales"].sum().sort_values(ascending=False)
+
+# Create the bar chart
+plt.figure(figsize=(8, 5))
+segment_sales.plot(kind="bar")
+
+plt.title("Sales by Customer Segment")
+plt.xlabel("Customer Segment")
+plt.ylabel("Total Sales ($)")
+plt.xticks(rotation=0)
+plt.tight_layout()
+
+# Save the chart
+plt.savefig("segment_sales.png", dpi=300, bbox_inches="tight")
+plt.show()
+
+print(segment_sales)
+print("Chart saved as segment_sales.png")
