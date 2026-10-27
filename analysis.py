@@ -113,3 +113,33 @@ plt.xticks(rotation=0)
 plt.tight_layout()
 plt.savefig("category_profit.png")
 plt.show()
+# Sales by Customer Segment Visualization
+
+segment_sales = df.groupby("Segment")["Sales"].sum().sort_values(ascending=False)
+
+plt.figure(figsize=(8, 5))
+segment_sales.plot(kind="bar")
+
+plt.title("Sales by Customer Segment")
+plt.xlabel("Customer Segment")
+plt.ylabel("Total Sales")
+plt.xticks(rotation=0)
+
+plt.tight_layout()
+plt.savefig("segment_sales.png")
+plt.show()
+# Sales by Sub-Category Visualization
+
+subcategory_sales = df.groupby("Sub-Category")["Sales"].sum().sort_values(ascending=False)
+
+plt.figure(figsize=(12, 6))
+subcategory_sales.plot(kind="bar")
+
+plt.title("Sales by Product Sub-Category")
+plt.xlabel("Sub-Category")
+plt.ylabel("Total Sales")
+plt.xticks(rotation=45, ha="right")
+
+plt.tight_layout()
+plt.savefig("subcategory_sales.png")
+plt.show()
